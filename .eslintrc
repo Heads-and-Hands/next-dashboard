@@ -1,0 +1,10 @@
+{
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "rules": {
+    "react/react-in-jsx-scope": false,
+    "react/jsx-filename-extension": false,
+    "react/prop-types": false,
+    "no-trailing-spaces": "off"
+  }
+}
