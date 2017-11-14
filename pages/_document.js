@@ -1,5 +1,26 @@
 import Document, { Head, Main, NextScript } from 'next/document';
-import { ServerStyleSheet } from 'styled-components';
+import { ServerStyleSheet, injectGlobal } from 'styled-components';
+/* eslint-disable no-unused-expressions */
+injectGlobal`
+  html {
+    padding: 0;  
+    height: 100%;
+  }
+  
+  body {
+    box-sizing: border-box;
+    font-family: 'Roboto', Arial;
+    height: 100%;
+    padding: 0;  
+    margin: 0;
+  } 
+  #root {
+    height: 100%;
+  }
+`;
+
+
+
 
 export default class MyDocument extends Document {
   static getInitialProps({ renderPage }) {
@@ -14,6 +35,7 @@ export default class MyDocument extends Document {
       <html lang="ru">
         <Head>
           <title>My page</title>
+          <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" />
           {this.props.styleTags}
         </Head>
         <body>
