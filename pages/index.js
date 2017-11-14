@@ -1,9 +1,10 @@
 import { PureComponent } from 'react';
 import axios from 'axios';
 
-import { Title, Projects, Head, SignIn, Project } from '../pages.styles/index.style';
+import Link from '../components/link';
+import { Title, Projects, Head, Project } from '../pages.styles/index.style';
 
-export default class Main extends PureComponent {
+class Main extends PureComponent {
   static async getInitialProps() {
     const res = await axios({
       method: 'get',
@@ -33,6 +34,7 @@ export default class Main extends PureComponent {
       <div>
         <Head>
           <Title>Heads and Hands Dashboard</Title>
+          <Link href="sadsadasd">Вход</Link>
         </Head>
         <Projects>
           {
@@ -44,3 +46,5 @@ export default class Main extends PureComponent {
     );
   }
 }
+
+export default Main;
