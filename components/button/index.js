@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
+
 function Button({ text, click, className }) {
   return (
     <Wrapper onClick={click} className={className}>
