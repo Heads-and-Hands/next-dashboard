@@ -3,9 +3,7 @@ const mongoClient = require('mongodb').MongoClient;
 
 const dbUsers = 'mongodb://localhost:27017/projects';
 const router = express.Router();
-const bodyParser = require('body-parser');
 
-router.use(bodyParser.urlencoded({ extended: true }));
 
 router.get('/getProjects', async (req, res) => {
   try {

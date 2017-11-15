@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
 
-
 const Wrapper = styled.div`
   position: relative;
   box-sizing: border-box;
@@ -54,4 +53,4 @@ const Label = styled.label`
 `}
 `;
 
-export { Wrapper, Input, Label }
+export { Wrapper, Input, Label };

@@ -21,6 +21,7 @@ const Wrapper = styled.div`
   border-radius: 3px;
   cursor: pointer;
   transition: background-color, border-color, .4s;
+
   &:hover {
     background-color:  #2196F3;
     border-color: #fff;
@@ -31,6 +32,7 @@ const Title = styled.div`
   margin: 0;
   color: #2196F3;
   transition: color .4s;
+  
   ${Wrapper}:hover & {
     color: #fff;
   }

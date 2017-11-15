@@ -35,7 +35,12 @@ export default class ProjectCell extends PureComponent {
   render() {
     const { name, platform } = this.props.data;
     const {
-      hockey, github, teamcity, slack, PM, QA,
+      hockey,
+      github,
+      teamcity,
+      slack,
+      PM,
+      QA,
     } = this.state;
 
     return (

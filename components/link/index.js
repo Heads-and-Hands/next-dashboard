@@ -2,7 +2,6 @@ import LinkNext from 'next/link';
 import styled from 'styled-components';
 
 function LinkComponent({ path, children, className }) {
-  console.warn(path);
   return (
     <LinkNext path={path || 'sda'}>
       <Link className={className} href={path}>{children}</Link>
@@ -10,8 +9,8 @@ function LinkComponent({ path, children, className }) {
   );
 }
 
-const Link = styled.a`
-  box-sizing: border-box;
+const Link = styled.a` 
+  box-sizing: border-box;  
   display: flex;
   align-items: center;
   justify-content: center;

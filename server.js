@@ -1,6 +1,5 @@
 const express = require('express');
 const proxy = require('http-proxy-middleware');
-const mongoClient = require('mongodb').MongoClient;
 const bodyParser = require('body-parser');
 const next = require('next');
 const api = require('./api');
@@ -21,12 +20,11 @@ app.prepare()
     server.use(bodyParser.urlencoded({ extended: true }));
     server.use(bodyParser.json());
     server.use(bodyParser.text());
-
     server.use('/teamcity/ios', proxy(proxyIos));
     server.use('/teamcity/android', proxy(proxyAndroid));
     server.use('/redmine', proxy(proxyRedmine));
+    
     server.use('/api', api);
-
     server.get('*', (req, res) => handle(req, res));
     server.listen(port, () => console.log(`Server is listening on ${port}`));
   });
