@@ -21,6 +21,10 @@ class Main extends PureComponent {
       };
     }
   }
+  
+  componentWillUnmount() {
+    console.warn('yep');
+  }
 
   render() {
     const { projects } = this.props;
@@ -28,7 +32,7 @@ class Main extends PureComponent {
       <div>
         <Head>
           <Title>Heads and Hands Dashboard</Title>
-          <Link href="sadsadasd">Вход</Link>
+          <Link href="/admin">Вход</Link>
         </Head>
         <Projects>
           {

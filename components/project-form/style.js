@@ -10,7 +10,7 @@ const Wrapper = styled.div`
 const Name = styled(InputComponent)`
   margin-bottom: 20px;
 `;
-//
+
 const Platform = styled(InputComponent)`
   margin-bottom: 20px;
 `;

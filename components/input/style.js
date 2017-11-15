@@ -53,4 +53,8 @@ const Label = styled.label`
 `}
 `;
 
-export { Wrapper, Input, Label };
+export { 
+  Wrapper,
+  Input,
+  Label,
+};

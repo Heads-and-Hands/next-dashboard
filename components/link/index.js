@@ -1,10 +1,10 @@
 import LinkNext from 'next/link';
 import styled from 'styled-components';
 
-function LinkComponent({ path, children, className }) {
+function LinkComponent({ href, children, className }) {
   return (
-    <LinkNext path={path || 'sda'}>
-      <Link className={className} href={path}>{children}</Link>
+    <LinkNext href={href || 'dassdasa'}>
+      <Link className={className} href={href}>{children}</Link>
     </LinkNext>
   );
 }
@@ -15,6 +15,7 @@ const Link = styled.a`
   align-items: center;
   justify-content: center;
   height: 40px;
+  width: ${props => props.width || ''};
   padding: 10px 20px;
   border: 1px solid #2196F3;
   border-radius: 3px;

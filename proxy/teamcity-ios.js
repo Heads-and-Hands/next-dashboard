@@ -2,7 +2,7 @@ module.exports = {
   target: 'http://build.handh.ru:8080',
   changeOrigin: true,
   headers: {
-    Accept: 'application/json; charset=utf-8\ ',
+    Accept: 'application/json; charset=utf-8',
     'Content-Type': 'application/json; charset=utf-8',
     Authorization: 'Basic ZGV2ZWxvcGVyOmRldjE4NjE=',
     'Access-Control-Allow-Origin': '*',

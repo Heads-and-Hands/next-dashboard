@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import Button from './../button/button';
+import Button from './../button';
 
 export default function ProjectTitle({
   name, platform, clickButton, textButton, className,

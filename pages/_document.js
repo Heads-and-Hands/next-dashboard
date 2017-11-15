@@ -18,9 +18,7 @@ injectGlobal`
     height: 100%;
   }
 `;
-
-
-
+/* eslint-enable no-unused-expressions */
 
 export default class MyDocument extends Document {
   static getInitialProps({ renderPage }) {

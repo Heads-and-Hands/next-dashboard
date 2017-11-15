@@ -6,6 +6,7 @@
     "react/jsx-filename-extension": false,
     "react/prop-types": false,
     "no-trailing-spaces": "off",
-    "linebreak-style": ["error", "windows"]
+    "linebreak-style": ["error", "windows"],
+    "no-underscore-dangle": "off"
   }
 }

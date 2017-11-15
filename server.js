@@ -23,7 +23,7 @@ app.prepare()
     server.use('/teamcity/ios', proxy(proxyIos));
     server.use('/teamcity/android', proxy(proxyAndroid));
     server.use('/redmine', proxy(proxyRedmine));
-    
+
     server.use('/api', api);
     server.get('*', (req, res) => handle(req, res));
     server.listen(port, () => console.log(`Server is listening on ${port}`));
