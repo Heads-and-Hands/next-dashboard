@@ -1,31 +1,35 @@
 import { PureComponent } from 'react';
 import axios from 'axios';
-import Link from '../components/link';
+import withRedux from 'next-redux-wrapper';
+
+import initStore, { initProjects } from '../store';
 import { Title, Projects, Head, Project } from '../pages.styles/index.style';
+import Link from '../components/link';
 
 class Main extends PureComponent {
-  static async getInitialProps() {
-    try {
-      const res = await axios({
-        method: 'get',
-        url: 'http://localhost:3000/api/getProjects',
-        headers: {
-          Accept: 'application/json; charset=utf-8',
-        },
-      });
-      const projects = await res.data;
-      return { projects };
-    } catch (e) {
-      return {
-        projects: [],
-      };
+  static async getInitialProps({ store, isServer }) {
+    if (isServer) {
+      try {
+        const res = await axios({
+          method: 'get',
+          url: 'http://localhost:3000/api/getProjects',
+          headers: {
+            Accept: 'application/json; charset=utf-8',
+          },
+        });
+        const projects = await res.data;
+        store.dispatch(initProjects(projects));
+        return { isServer };
+      } catch (e) {
+        return {
+          projects: [],
+        };
+      }
+    } else {
+      return { isServer };
     }
   }
   
-  componentWillUnmount() {
-    console.warn('yep');
-  }
-
   render() {
     const { projects } = this.props;
     return (
@@ -45,4 +49,13 @@ class Main extends PureComponent {
   }
 }
 
-export default Main;
+const mapStateToProps = state => ({
+  projects: state.projects,
+});
+
+const mapDispatchProps = dispatch => ({
+  dispatch,
+  initProjects: () => dispatch(initProjects),
+});
+
+export default withRedux(initStore, mapStateToProps, mapDispatchProps)(Main);

@@ -9,7 +9,7 @@ import {
   Redmine,
   Github,
   Submit,
-} from './project-form.style';
+} from './style';
 
 class ProjectForm extends Component {
   changeValue = (value, target) => {

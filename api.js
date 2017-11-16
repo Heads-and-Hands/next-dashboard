@@ -18,7 +18,8 @@ router.get('/getProjects', async (req, res) => {
 
 router.post('/auth', async (req, res) => {
   try {
-    const data = JSON.parse(req.body);
+    const data = req.body;
+    console.warn(data);
     const db = await mongoClient.connect(dbUsers);
     const user = await db.collection('users').find(data).toArray();
     db.close();
@@ -31,6 +32,7 @@ router.post('/auth', async (req, res) => {
       success: false,
     });
   } catch (e) {
+    console.warn(e);
     return res.send({
       status: 'router error',
     });
