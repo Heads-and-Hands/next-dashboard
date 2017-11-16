@@ -26,5 +26,8 @@ app.prepare()
 
     server.use('/api', api);
     server.get('*', (req, res) => handle(req, res));
-    server.listen(port, () => console.log(`Server is listening on ${port}`));
+    server.listen(port, (error) => {
+      if (error) console.warn(error);
+      console.log(`Server is listening on ${port}`)
+    });
   });
