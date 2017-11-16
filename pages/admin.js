@@ -1,6 +1,7 @@
 import withRedux from 'next-redux-wrapper';
+import Router from 'next/router';
 
-import { Auth } from '../components';
+
 import initStore, { initProjects } from '../store';
 
 
@@ -9,7 +10,7 @@ import initStore, { initProjects } from '../store';
 
 function Admin({ isLogined }) {
   return (
-    isLogined ? <div>Hello you logined</div> : <Auth />            
+    isLogined ? <div>Hello you logined</div> : Router.push('/about')            
   );
 }
 
