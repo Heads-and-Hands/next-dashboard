@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 function LinkComponent({ href, children, className }) {
   return (
-    <LinkNext href={href || 'dassdasa'}>
+    <LinkNext href={href || '/dassdasa'}>
       <Link className={className} href={href}>{children}</Link>
     </LinkNext>
   );

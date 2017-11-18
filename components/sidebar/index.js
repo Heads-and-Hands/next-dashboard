@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import Link from '../link';
 
 
-function Sidebar({ links }) {
+export default function Sidebar({ links, className }) {
   return (
-    <Wrapper className={this.props.className}>
+    <Wrapper className={className}>
       <Link href="/"> Главная </Link>
       {
         links.map(item => 
@@ -29,4 +29,3 @@ height: 100vh;
 background: #1d4870;
 `;
 
-export default Sidebar;

@@ -2,6 +2,7 @@ const express = require('express');
 const proxy = require('http-proxy-middleware');
 const bodyParser = require('body-parser');
 const next = require('next');
+const compression = require('compression');
 const api = require('./api');
 
 const port = parseInt(process.env.PORT, 10) || 3000;
@@ -17,6 +18,7 @@ const proxyRedmine = require('../next-dashboard/proxy/redmine');
 app.prepare()
   .then(() => {
     const server = express();
+    server.use(compression());
     server.use(bodyParser.urlencoded({ extended: true }));
     server.use(bodyParser.json());
     server.use(bodyParser.text());

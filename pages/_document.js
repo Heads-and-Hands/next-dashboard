@@ -33,12 +33,12 @@ export default class MyDocument extends Document {
       <html lang="ru">
         <Head>
           <title>My page</title>
-          <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" />
           {this.props.styleTags}
         </Head>
         <body>
           <Main />
           <NextScript />
+          <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" />          
         </body>
       </html>
     );

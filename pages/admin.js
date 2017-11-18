@@ -4,6 +4,7 @@ import { PureComponent } from 'react';
 import styled from 'styled-components';
 
 import initStore from '../store';
+import Sidebar from './../components/sidebar';
 // import AdminContent from '../components';
 
 class Admin extends PureComponent {
@@ -22,10 +23,11 @@ class Admin extends PureComponent {
         title: 'Редактировать проект',
       },
     ];
+
     return (
       <Wrapper>
         <SideBar links={Links} />
-         <Content />   
+        <div>gfhg</div>
       </Wrapper>
 
     );   
@@ -41,20 +43,20 @@ class Admin extends PureComponent {
 }
 
 const Wrapper = styled.div`
-display: flex;
+  display: flex;
 `;
 
 const SideBar = styled(Sidebar)`
-width: 30%;
+  width: 30%;
 `;
 
-const Content = styled(AdminContent)`
-display: flex;
-justify-content: center;
-align-items: center;
-width: 70%;
-height: 100vh;
-`;
+// const Content = styled(AdminContent)`
+// display: flex;
+// justify-content: center;
+// align-items: center;
+// width: 70%;
+// height: 100vh;
+// `;
 
 
 export default withRedux(initStore, state => ({ isLogined: state.isLogined }), null)(Admin);
