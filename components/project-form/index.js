@@ -22,7 +22,9 @@ class ProjectForm extends Component {
 
   render() {
     const {
-      name, platform, hockeyAppId, redmineId, github, teamCityId,
+      name, platform, 
+      hockeyAppId, redmineId,
+      github, teamCityId,
     } = this.props;
     return (
       <Wrapper className={this.props.className}>

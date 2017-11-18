@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Input, Button } from '../components';
+import { InputComponent as Input, Button } from '../components';
 
 
 const Wrapper = styled.div`

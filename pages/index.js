@@ -31,12 +31,13 @@ class Main extends PureComponent {
   }
   
   render() {
-    const { projects } = this.props;
+    const { projects, isLogined } = this.props;
     return (
       <div>
         <Head>
           <Title>Heads and Hands Dashboard</Title>
-          <Link href="/admin">Вход</Link>
+          
+          <Link href={isLogined ? '/admin' : '/auth'} >{isLogined ? 'Админка' : 'Вход'}</Link>
         </Head>
         <Projects>
           {
@@ -51,6 +52,7 @@ class Main extends PureComponent {
 
 const mapStateToProps = state => ({
   projects: state.projects,
+  isLogined: state.isLogined,
 });
 
 const mapDispatchProps = dispatch => ({
