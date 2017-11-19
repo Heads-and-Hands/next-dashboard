@@ -1,10 +1,10 @@
 import { PureComponent } from 'react';
 import axios from 'axios';
 import withRedux from 'next-redux-wrapper';
+import Link from 'next/link';
 
 import initStore, { initProjects } from '../store';
 import { Title, Projects, Head, Project } from '../pages.styles/index.style';
-import Link from '../components/link';
 
 class Main extends PureComponent {
   static async getInitialProps({ store, isServer }) {
@@ -29,15 +29,14 @@ class Main extends PureComponent {
       return { isServer };
     }
   }
-  
+
   render() {
     const { projects, isLogined } = this.props;
     return (
       <div>
         <Head>
-          <Title>Heads and Hands Dashboard</Title>
-          
-          <Link href={isLogined ? '/admin' : '/auth'} >{isLogined ? 'Админка' : 'Вход'}</Link>
+          <Title>Heads and Hands Dashboard</Title>  
+          <Link href={isLogined ? '/admin' : '/auth'} prefetch><a>sadasdsa</a></Link>
         </Head>
         <Projects>
           {

@@ -53,7 +53,7 @@ class Auth extends PureComponent {
             target="password"
             type="password"
           />
-          <Submit text="Войти" click={this.handleSubmit} />
+          <Submit click={this.handleSubmit} >Войти</Submit>
           {this.state.error && <Error>Логин или пароль неверны</Error>}
         </Form>
       </Wrapper>

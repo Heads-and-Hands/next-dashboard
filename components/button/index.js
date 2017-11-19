@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 
-function Button({ text, click, className }) {
+function Button({ children, click, className }) {
   return (
     <Wrapper onClick={click} className={className}>
-      <Title>{text}</Title>
+      <Title>{children}</Title>
     </Wrapper>
   );
 }

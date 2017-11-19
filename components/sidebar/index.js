@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-import Link from '../link';
+import Link from './../link';
 
 
-export default function Sidebar({ links, className }) {
+export default ({ links, className }) => {
   return (
     <Wrapper className={className}>
       <Link href="/"> Главная </Link>
@@ -11,13 +11,13 @@ export default function Sidebar({ links, className }) {
         links.map(item => 
           (
             <li key={item.path}>
-              <Link href={item.path}>{item.title}</Link>
+              <Link href={item.href} as={item.href}>{item.title}</Link>
             </li>
           ))
       }
     </Wrapper>
   );
-}
+};
 
 const Wrapper = styled.div`
 display: flex;

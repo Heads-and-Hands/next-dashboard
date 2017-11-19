@@ -3,17 +3,16 @@ const proxy = require('http-proxy-middleware');
 const bodyParser = require('body-parser');
 const next = require('next');
 const compression = require('compression');
+
+const proxyAndroid = require('../next-dashboard/proxy/teamcity-android');
+const proxyIos = require('../next-dashboard/proxy/teamcity-ios');
+const proxyRedmine = require('../next-dashboard/proxy/redmine');
 const api = require('./api');
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
-
-const proxyAndroid = require('../next-dashboard/proxy/teamcity-android');
-const proxyIos = require('../next-dashboard/proxy/teamcity-ios');
-const proxyRedmine = require('../next-dashboard/proxy/redmine');
-
 
 app.prepare()
   .then(() => {
@@ -27,9 +26,20 @@ app.prepare()
     server.use('/redmine', proxy(proxyRedmine));
 
     server.use('/api', api);
+    server.get('/admin/addProject', (req, res) => {
+      const actualPage = '/admin';
+      app.render(req, res, actualPage);
+    });
+    // server.get('/admin/deleteProject', (req, res) => app.render(req, res, '/admin', req.query));
+    // server.get('/admin/editProject', (req, res) => app.render(req, res, '/admin', req.query));
+    server.get('/p/:id', (req, res) => {
+      const actualPage = '/admin';
+      const queryParams = { title: req.params.id } 
+      app.render(req, res, actualPage, queryParams)
+    })
     server.get('*', (req, res) => handle(req, res));
     server.listen(port, (error) => {
       if (error) console.warn(error);
-      console.log(`Server is listening on ${port}`)
+      console.log(`Server is listening on ${port}`);
     });
   });

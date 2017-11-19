@@ -1,25 +1,33 @@
 import withRedux from 'next-redux-wrapper';
 import Router from 'next/router';
-import { PureComponent } from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 
 import initStore from '../store';
+import { AdminContent } from './../components';
 import Sidebar from './../components/sidebar';
-// import AdminContent from '../components';
 
 class Admin extends PureComponent {
+  static async getInitialProps({ store }) {
+    if (!store.getState().isLogined) {
+      Router.push('/auth');
+    }
+  }
   getAdminContent = () => {
     const Links = [
       {
         path: '/admin/addProject',
+        href: '/admin?add',
         title: 'Создать проект',
       },
       {
         path: '/admin/deleteProject',
+        href: '/admin?delete',
         title: 'Удалить проект',
       },
       {
         path: '/admin/editProject',
+        href: '/admin?edit',
         title: 'Редактировать проект',
       },
     ];
@@ -27,7 +35,7 @@ class Admin extends PureComponent {
     return (
       <Wrapper>
         <SideBar links={Links} />
-        <div>gfhg</div>
+        <AdminContent />
       </Wrapper>
 
     );   
@@ -36,9 +44,8 @@ class Admin extends PureComponent {
   render() {
     const { isLogined } = this.props;
     
-    return (
-      isLogined ? this.getAdminContent() : Router.push('/auth') 
-    ); 
+    return isLogined ? this.getAdminContent() : <div>dasdsa</div>
+    // Router.push('/auth'); 
   }
 }
 
@@ -58,6 +65,4 @@ const SideBar = styled(Sidebar)`
 // height: 100vh;
 // `;
 
-
 export default withRedux(initStore, state => ({ isLogined: state.isLogined }), null)(Admin);
-  

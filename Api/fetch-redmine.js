@@ -15,10 +15,8 @@ export async function fetchRedmineUser(id) {
       url,
       headers,
     });
-    // console.warn(data);
     return `${data.user.firstname} ${data.user.lastname}`;
   } catch (e) {
-    console.warn(e);
     return false;
   }
 }
@@ -33,13 +31,19 @@ export default async function fetchRedmine(id) {
   });
 
   const slack = data.project.custom_fields[1].value;
-  const [PM, QA] = await Promise.all([
-    fetchRedmineUser(data.project.custom_fields[2].value),
-    fetchRedmineUser(data.project.custom_fields[3].value),
-  ]);
-  return {
-    slack,
-    PM,
-    QA,
-  };
+  try {
+    const [PM, QA] = await Promise.all([
+      fetchRedmineUser(data.project.custom_fields[2].value),
+      fetchRedmineUser(data.project.custom_fields[3].value),
+    ]);
+    return {
+      slack,
+      PM,
+      QA,
+    };  
+  } catch (e) {
+    return {
+      slack,
+    };
+  }
 }

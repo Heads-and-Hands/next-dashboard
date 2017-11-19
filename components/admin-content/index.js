@@ -1,33 +1,13 @@
-import React, { PureComponent } from 'react';
-import styled from 'styled-components';
 
-import Sidebar from './../sidebar';
+import { withRouter } from 'next/router';
 
-export default class AdminContent extends PureComponent {
-  render() {
-    const { Links } = this.props;
-    return (
-      <Wrapper>
-        <SideBar links={Links} />
-          
-      </Wrapper>
+function AdminContent({ router, href }) { 
+  return (
+    <div>
+      {router.pathname}
+      <div>{href}</div>
+    </div>
+  );
+};
 
-    );
-  }
-}
-
-const Wrapper = styled.div`
-display: flex;
-`;
-
-const SideBar = styled(Sidebar)`
-width: 30%;
-`;
-
-// const Content = styled(AdminContent)`
-// display: flex;
-// justify-content: center;
-// align-items: center;
-// width: 70%;
-// height: 100vh;
-// `;
+export default withRouter(AdminContent);

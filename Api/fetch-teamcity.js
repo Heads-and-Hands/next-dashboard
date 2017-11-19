@@ -3,11 +3,11 @@ import axios from 'axios';
 export default async function fetchTeamCity(project) {
   if (!project.teamCityId) return false;
 
-  const headers = [
-    { Accept: 'application/json; charset=utf-8' },
-    { 'Content-Type': 'application/json; charset=utf-8' },
-    { Authorization: `Basic ${window.btoa('developer:dev1861')}` },
-  ];
+  const headers = {
+    Accept: 'application/json; charset=utf-8' ,
+    'Content-Type': 'application/json; charset=utf-8',
+    Authorization: `Basic ${window.btoa('developer:dev1861')}`, 
+  };
   let serverURL = '';
   if (project.platform === 'iOS') {
     serverURL = 'teamcity/ios';
