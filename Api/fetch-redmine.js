@@ -5,6 +5,7 @@ const headers = {
   Accept: 'application/json; charset=utf-8',
   'Content-Type': 'application/json; charset=utf-8',
   'X-Redmine-API-Key': redmineApiToken,
+  'Access-Control-Allow-Origin': '*',
 };
 
 export async function fetchRedmineUser(id) {

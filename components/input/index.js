@@ -39,14 +39,18 @@ export default class InputComponent extends PureComponent {
   render() {
     return (
       <div>
-        <Wrapper active={this.state.labelActive} className={this.props.className}>
+        <Wrapper 
+          active={this.state.labelActive || this.state.value} 
+          className={this.props.className}
+        >
           <Input
             type={this.props.type}
             onBlur={this.focusOut}
             onFocus={this.focus}
             onChange={this.changeValue}
+            value={this.state.value}
           />
-          <Label active={this.state.labelActive}>
+          <Label active={this.state.labelActive || this.state.value}>
             {this.props.label}
           </Label>
         </Wrapper>

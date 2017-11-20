@@ -26,17 +26,6 @@ app.prepare()
     server.use('/redmine', proxy(proxyRedmine));
 
     server.use('/api', api);
-    server.get('/admin/addProject', (req, res) => {
-      const actualPage = '/admin';
-      app.render(req, res, actualPage);
-    });
-    // server.get('/admin/deleteProject', (req, res) => app.render(req, res, '/admin', req.query));
-    // server.get('/admin/editProject', (req, res) => app.render(req, res, '/admin', req.query));
-    server.get('/p/:id', (req, res) => {
-      const actualPage = '/admin';
-      const queryParams = { title: req.params.id } 
-      app.render(req, res, actualPage, queryParams)
-    })
     server.get('*', (req, res) => handle(req, res));
     server.listen(port, (error) => {
       if (error) console.warn(error);

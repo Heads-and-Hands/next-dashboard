@@ -22,19 +22,20 @@ class ProjectForm extends Component {
 
   render() {
     const {
-      name, platform, 
+      name, platform,  
       hockeyAppId, redmineId,
-      github, teamCityId,
+      githubId, teamCityId,
+      text,
     } = this.props;
     return (
       <Wrapper className={this.props.className}>
-        <Name label="Проект" target="name" vlaue={name} onChange={this.changeValue} />
-        <Platform target="platform" label="Платформа" vlaue={platform} onChange={this.changeValue} />
-        <HockeyApp target="hockeyAppId" label="HockeyAppId" vlaue={hockeyAppId} onChange={this.changeValue} />
-        <TeamCity target="teamCityId" label="TeamCityId" vlaue={teamCityId} onChange={this.changeValue} />
-        <Redmine target="redmineId" label="RedmineId" vlaue={redmineId} onChange={this.changeValue} />
-        <Github target="githubId" label="GithubId" vlaue={github} onChange={this.changeValue} />
-        <Submit text="Добавить" click={this.submit} />
+        <Name label="Проект" target="name" value={name} onChange={this.changeValue} />
+        <Platform target="platform" label="Платформа" value={platform} onChange={this.changeValue} />
+        <HockeyApp target="hockeyAppId" label="HockeyAppId" value={hockeyAppId} onChange={this.changeValue} />
+        <TeamCity target="teamCityId" label="TeamCityId" value={teamCityId} onChange={this.changeValue} />
+        <Redmine target="redmineId" label="RedmineId" value={redmineId} onChange={this.changeValue} />
+        <Github target="githubId" label="GithubId" value={githubId} onChange={this.changeValue} />
+        <Submit click={this.submit}>{text}</Submit>
       </Wrapper>
     );
   }

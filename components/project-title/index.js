@@ -9,7 +9,7 @@ export default function ProjectTitle({
     <div className={className}>
       <Wrapper>
         <Name>{name} - {platform}</Name>
-        <Button click={clickButton} text={textButton} />
+        <Button click={clickButton}>{textButton}</Button>
       </Wrapper>
     </div>
   );
@@ -20,6 +20,7 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   border: 1px solid aliceblue;
+  padding-left: 10px;
 `;
 
 const Name = styled.div`

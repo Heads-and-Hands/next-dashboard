@@ -27,7 +27,9 @@ class Auth extends PureComponent {
     });
     if (data.success) {
       logIn(true);
-      router.push('/admin');
+      router.push('/admin?addProject', '/admin/addProject');
+    } else {
+      this.setState({ error: true });
     }
   }
 

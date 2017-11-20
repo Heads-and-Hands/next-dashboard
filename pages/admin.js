@@ -1,5 +1,4 @@
 import withRedux from 'next-redux-wrapper';
-import Router from 'next/router';
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 
@@ -8,10 +7,12 @@ import { AdminContent } from './../components';
 import Sidebar from './../components/sidebar';
 
 class Admin extends PureComponent {
-  static async getInitialProps({ store }) {
+  static async getInitialProps({ res, store, isServer }) {
     if (!store.getState().isLogined) {
-      Router.push('/auth');
+      res.redirect('/auth');
+      res.end();
     }
+    return {};
   }
   getAdminContent = () => {
     const Links = [
@@ -44,7 +45,7 @@ class Admin extends PureComponent {
   render() {
     const { isLogined } = this.props;
     
-    return isLogined ? this.getAdminContent() : <div>dasdsa</div>
+    return isLogined ? this.getAdminContent() : <div>dasdsa</div>;
     // Router.push('/auth'); 
   }
 }
@@ -56,13 +57,5 @@ const Wrapper = styled.div`
 const SideBar = styled(Sidebar)`
   width: 30%;
 `;
-
-// const Content = styled(AdminContent)`
-// display: flex;
-// justify-content: center;
-// align-items: center;
-// width: 70%;
-// height: 100vh;
-// `;
 
 export default withRedux(initStore, state => ({ isLogined: state.isLogined }), null)(Admin);

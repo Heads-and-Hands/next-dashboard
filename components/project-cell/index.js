@@ -18,7 +18,7 @@ export default class ProjectCell extends PureComponent {
 
   async componentDidMount() {
     this.updateInterval = setInterval(() => this.updateProject(), 60000);
-    await this.updateProject();
+    this.updateProject();
   }
 
   componentWillUnmount() {

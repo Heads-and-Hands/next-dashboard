@@ -1,6 +1,7 @@
 const express = require('express');
-const mongoClient = require('mongodb').MongoClient;
+const mongo = require('mongodb');
 
+const mongoClient = mongo.MongoClient;
 const dbUsers = 'mongodb://localhost:27017/projects';
 const router = express.Router();
 
@@ -19,7 +20,6 @@ router.get('/getProjects', async (req, res) => {
 router.post('/auth', async (req, res) => {
   try {
     const data = req.body;
-    console.warn(data);
     const db = await mongoClient.connect(dbUsers);
     const user = await db.collection('users').find(data).toArray();
     db.close();
@@ -32,7 +32,6 @@ router.post('/auth', async (req, res) => {
       success: false,
     });
   } catch (e) {
-    console.warn(e);
     return res.send({
       status: 'router error',
     });
@@ -41,26 +40,30 @@ router.post('/auth', async (req, res) => {
 
 router.post('/deleteProject', async (req, res) => {
   try {
-    const data = JSON.parse(req.body);
+    const data = req.body;
+    console.warn(data);
     const db = await mongoClient.connect(dbUsers);
-    const result = await db.collection('projects').findOneAndDelete(data);
+    const result = await db.collection('projects').findOneAndDelete({ _id: new mongo.ObjectID(data._id) });
     db.close();
     res.send({
       success: true,
-      result,
     });
   } catch (e) {
+    console.warn(e);
     res.send({ success: false });
   }
 });
 
 router.post('/createProject', async (req, res) => {
   try {
-    const data = JSON.parse(req.body);
+    const data = req.body;
     const db = await mongoClient.connect(dbUsers);
     const result = await db.collection('projects').insert(data);
     db.close();
-    res.send({ success: true });
+    res.send({ 
+      success: true, 
+      _id: result.ops[0]._id,
+    });
   } catch (e) {
     res.send({ success: false });
   }
@@ -68,15 +71,32 @@ router.post('/createProject', async (req, res) => {
 
 router.post('/updateProject', async (req, res) => {
   try {
-    const data = JSON.parse(req.body);
+    const data = req.body;
+    const { 
+      name, platform, 
+      hockeyAppId, redmineId,
+      github, teamCityId,
+    } = data;
     const db = await mongoClient.connect(dbUsers);
-    const result = await db.collection('projects').findOneAndUpdate(data);
+    const result = await db.collection('projects')
+      .findOneAndUpdate(
+        { _id: new mongo.ObjectID(data._id) }, 
+        { 
+          name, 
+          platform,
+          hockeyAppId, 
+          redmineId,
+          github, 
+          teamCityId,
+        },
+      );
     db.close();
     res.send({
       success: true,
       result,
     });
   } catch (e) {
+    console.warn(e);
     res.send({ success: false });
   }
 });

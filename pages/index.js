@@ -8,7 +8,7 @@ import { Title, Projects, Head, Project } from '../pages.styles/index.style';
 
 class Main extends PureComponent {
   static async getInitialProps({ store, isServer }) {
-    if (isServer) {
+    if (!store.getState().projects.length) {
       try {
         const res = await axios({
           method: 'get',
@@ -36,7 +36,7 @@ class Main extends PureComponent {
       <div>
         <Head>
           <Title>Heads and Hands Dashboard</Title>  
-          <Link href={isLogined ? '/admin' : '/auth'} prefetch><a>sadasdsa</a></Link>
+          <Link href={isLogined ? '/admin' : '/auth'} prefetch><a>Вход</a></Link>
         </Head>
         <Projects>
           {

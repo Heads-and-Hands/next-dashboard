@@ -1,5 +1,5 @@
 module.exports = {
-  target: 'http://pm.handh.ru',
+  target: 'https://pm.handh.ru',
   changeOrigin: true,
   headers: {
     Accept: 'application/json; charset=utf-8',

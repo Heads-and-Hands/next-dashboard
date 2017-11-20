@@ -11,7 +11,7 @@ export default ({ links, className }) => {
         links.map(item => 
           (
             <li key={item.path}>
-              <Link href={item.href} as={item.href}>{item.title}</Link>
+              <Link href={item.href} as={item.path}>{item.title}</Link>
             </li>
           ))
       }
