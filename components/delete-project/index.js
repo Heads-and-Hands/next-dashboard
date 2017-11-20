@@ -10,8 +10,8 @@ class DeleteProject extends PureComponent {
     console.warn(_id);
     const { data } = await axios({
       method: 'post',
-      url: 'http://localhost:3000/api/deleteProject',
-      data: { _id }, 
+      url: 'http://dashboard.handh.ru:3000/api/deleteProject',
+      data: { _id },
     });
     if (data.success) {
       this.props.deleteProject({ _id });
@@ -24,11 +24,11 @@ class DeleteProject extends PureComponent {
   render() {
     const { projects } = this.props;
     return (
-      <ProjectTitle 
-        onProjectClick={this.deleteProject} 
-        title="Удалить проект" 
-        buttonText="Удалить" 
-        projects={projects} 
+      <ProjectTitle
+        onProjectClick={this.deleteProject}
+        title="Удалить проект"
+        buttonText="Удалить"
+        projects={projects}
       />
     );
   }

@@ -27,8 +27,8 @@ class AddProjectComponent extends PureComponent {
     console.warn(this.state);
     const { data } = await axios({
       method: 'post',
-      url: 'http://localhost:3000/api/createProject',
-      data: { ...this.state }, 
+      url: 'http://dashboard.handh.ru:3000/api/createProject',
+      data: { ...this.state },
     });
 
     if (data.success) {

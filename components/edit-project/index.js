@@ -14,11 +14,11 @@ class EditProject extends PureComponent {
   }
 
   goto = ({ _id }) => () => {
-    
+
     console.warn(_id);
     this.setState((prevState, props) => {
       console.log(prevState);
-      return { 
+      return {
         ...prevState,
         chosen: !prevState.chosen,
         ...props.projects.find(item => item._id === _id),
@@ -35,36 +35,36 @@ class EditProject extends PureComponent {
   editProject = async () => {
     const { data } = await axios({
       method: 'post',
-      url: 'http://localhost:3000/api/updateProject',
-      data: { ...this.state }, 
+      url: 'http://dashboard.handh.ru:3000/api/updateProject',
+      data: { ...this.state },
     });
-    if (data.success) {  
+    if (data.success) {
       this.props.editProject({ ...this.state });
       this.setState((prevState) => {
-        return { 
+        return {
           ...prevState,
           chosen: !prevState.chosen,
         };
-      });   
-    } 
+      });
+    }
   }
 
   render() {
     const { projects } = this.props;
     const { chosen } = this.state;
-    return ( 
-      chosen ? 
-        <ProjectForm 
-          onSubmit={this.editProject} 
+    return (
+      chosen ?
+        <ProjectForm
+          onSubmit={this.editProject}
           text="Редактировать"
           onChangeField={this.changeValue}
-          {...this.state} 
-        /> : 
-        <ProjectTitles 
-          onProjectClick={this.goto} 
-          title="Редактирование проектов" 
-          buttonText="Редактировать" 
-          projects={projects} 
+          {...this.state}
+        /> :
+        <ProjectTitles
+          onProjectClick={this.goto}
+          title="Редактирование проектов"
+          buttonText="Редактировать"
+          projects={projects}
         />
     );
   }

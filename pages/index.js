@@ -12,7 +12,7 @@ class Main extends PureComponent {
       try {
         const res = await axios({
           method: 'get',
-          url: 'http://localhost:3000/api/getProjects',
+          url: 'http://dashboard.handh.ru:3000/api/getProjects',
           headers: {
             Accept: 'application/json; charset=utf-8',
           },
@@ -35,7 +35,7 @@ class Main extends PureComponent {
     return (
       <div>
         <Head>
-          <Title>Heads and Hands Dashboard</Title>  
+          <Title>Heads and Hands Dashboard</Title>
           <Link href={isLogined ? '/admin' : '/auth'} prefetch><a>Вход</a></Link>
         </Head>
         <Projects>

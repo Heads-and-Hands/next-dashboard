@@ -11,19 +11,19 @@ class Auth extends PureComponent {
     super(props);
     this.state = {
       password: '',
-      login: '',  
+      login: '',
       error: false,
     };
   }
 
-  
+
   handleSubmit = async () => {
     const { password, login } = this.state;
-    const { router, logIn } = this.props;  
+    const { router, logIn } = this.props;
     const { data } = await axios({
       method: 'post',
-      url: 'http://localhost:3000/api/auth',
-      data: { password, login },    
+      url: 'http://dashboard.handh.ru:3000/api/auth',
+      data: { password, login },
     });
     if (data.success) {
       logIn(true);
@@ -39,10 +39,10 @@ class Auth extends PureComponent {
 
   render() {
     const { password, login } = this.state;
-    return ( 
+    return (
       <Wrapper>
         <Form>
-          <Login 
+          <Login
             label="Login"
             onChange={this.changeField}
             value={login}
