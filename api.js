@@ -96,7 +96,6 @@ router.post('/updateProject', async (req, res) => {
       result,
     });
   } catch (e) {
-    console.warn(e);
     res.send({ success: false });
   }
 });
