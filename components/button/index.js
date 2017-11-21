@@ -17,15 +17,16 @@ const Wrapper = styled.div`
   justify-content: center;
   height: 40px;
   padding: 10px 20px;
-  border: 1px solid #2196F3;
+  border: 1px solid;
   border-radius: 3px;
   cursor: pointer;
   transition: background-color, border-color, .4s;
-
-  &:hover {
-    background-color:  #2196F3;
-    border-color: #fff;
-  }
+  color: #2962ff;
+  border-color: #2962ff; 
+   &:hover {
+    color: #fff;
+    background: #2962ff; 
+   }
 `;
 
 const Title = styled.div`

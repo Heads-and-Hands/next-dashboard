@@ -41,15 +41,14 @@ router.post('/auth', async (req, res) => {
 router.post('/deleteProject', async (req, res) => {
   try {
     const data = req.body;
-    console.warn(data);
     const db = await mongoClient.connect(dbUsers);
     const result = await db.collection('projects').findOneAndDelete({ _id: new mongo.ObjectID(data._id) });
     db.close();
     res.send({
       success: true,
+      result,
     });
   } catch (e) {
-    console.warn(e);
     res.send({ success: false });
   }
 });

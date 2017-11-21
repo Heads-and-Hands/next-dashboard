@@ -1,12 +1,12 @@
 import { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
-
-import { withRouter } from 'next/router';
+import styled from 'styled-components';
 
 import { editProject } from './../../store';
 import ProjectTitles from './../project-titles';
 import ProjectForm from './../project-form';
+import Button from './../button';
+import axios from './../../Api/axios';
 
 class EditProject extends PureComponent {
   state = {
@@ -14,18 +14,15 @@ class EditProject extends PureComponent {
   }
 
   goto = ({ _id }) => () => {
+    this.setState((prevState, props) => ({
+      ...prevState,
+      chosen: !prevState.chosen,
+      ...props.projects.find(item => item._id === _id),
+    }));
+  }
 
-    console.warn(_id);
-    this.setState((prevState, props) => {
-      console.log(prevState);
-      return {
-        ...prevState,
-        chosen: !prevState.chosen,
-        ...props.projects.find(item => item._id === _id),
-      };
-    });
-
-    // this.setState(prevState => ({...prevState, chosen: true}))
+  goBack = () => {
+    this.setState(prevState => ({ ...prevState, chosen: !prevState.chosen }));
   }
 
   changeValue = (value, target) => {
@@ -33,19 +30,13 @@ class EditProject extends PureComponent {
   }
 
   editProject = async () => {
-    const { data } = await axios({
-      method: 'post',
-      url: 'http://dashboard.handh.ru:3000/api/updateProject',
-      data: { ...this.state },
-    });
+    const { data } = await axios.post('/updateProject', { ...this.state });
     if (data.success) {
       this.props.editProject({ ...this.state });
-      this.setState((prevState) => {
-        return {
-          ...prevState,
-          chosen: !prevState.chosen,
-        };
-      });
+      this.setState(prevState => ({
+        ...prevState,
+        chosen: !prevState.chosen,
+      }));
     }
   }
 
@@ -54,12 +45,15 @@ class EditProject extends PureComponent {
     const { chosen } = this.state;
     return (
       chosen ?
-        <ProjectForm
-          onSubmit={this.editProject}
-          text="Редактировать"
-          onChangeField={this.changeValue}
-          {...this.state}
-        /> :
+        <div>
+          <ProjectForm
+            onSubmit={this.editProject}
+            text="Редактировать"
+            onChangeField={this.changeValue}
+            {...this.state}
+          />
+          <Back click={this.goBack}>Назад</Back>
+        </div> :
         <ProjectTitles
           onProjectClick={this.goto}
           title="Редактирование проектов"
@@ -69,6 +63,10 @@ class EditProject extends PureComponent {
     );
   }
 }
+
+const Back = styled(Button)`
+  margin-top: 20px;
+`;
 
 const mapDispatchToProps = dispatch => ({
   dispatch,

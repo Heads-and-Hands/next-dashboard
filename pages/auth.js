@@ -1,30 +1,45 @@
 import React, { PureComponent } from 'react';
-import axios from 'axios';
 import withRedux from 'next-redux-wrapper';
 import { withRouter } from 'next/router';
 
-import initStore, { auth } from '../store';
+import initStore, { auth, initProjects } from '../store';
 import { Wrapper, Form, Login, Password, Submit, Error } from '../pages.styles/auth.style';
+import axios from './../Api/axios';
 
 class Auth extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      password: '',
-      login: '',
-      error: false,
-    };
+  static async getInitialProps({ isServer, store }) {
+    if (!store.getState().projects.length) {
+      try {
+        const res = await axios({
+          method: 'get',
+          url: '/getProjects',
+          headers: {
+            Accept: 'application/json; charset=utf-8',
+          },
+        });
+        const projects = await res.data;
+        store.dispatch(initProjects(projects));
+        return { isServer };
+      } catch (e) {
+        return {
+          projects: [],
+        };
+      }
+    } else {
+      return { isServer };
+    }
   }
 
+  state = {
+    password: '',
+    login: '',  
+    error: false,
+  };
 
   handleSubmit = async () => {
     const { password, login } = this.state;
-    const { router, logIn } = this.props;
-    const { data } = await axios({
-      method: 'post',
-      url: 'http://dashboard.handh.ru:3000/api/auth',
-      data: { password, login },
-    });
+    const { router, logIn } = this.props;  
+    const { data } = await axios.post('/auth', { password, login });
     if (data.success) {
       logIn(true);
       router.push('/admin?addProject', '/admin/addProject');
@@ -39,10 +54,10 @@ class Auth extends PureComponent {
 
   render() {
     const { password, login } = this.state;
-    return (
+    return ( 
       <Wrapper>
         <Form>
-          <Login
+          <Login 
             label="Login"
             onChange={this.changeField}
             value={login}
@@ -66,7 +81,12 @@ class Auth extends PureComponent {
 const mapDispatchToProps = dispatch => ({
   dispatch,
   logIn: success => dispatch(auth(success)),
+  initProjects: () => dispatch(initProjects),
 });
 
 const enhanced = withRouter(Auth);
-export default withRedux(initStore, null, mapDispatchToProps)(enhanced);
+export default withRedux(
+  initStore,
+  state => ({ projects: state.projects }), 
+  mapDispatchToProps,
+)(enhanced);

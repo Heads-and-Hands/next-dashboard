@@ -1,21 +1,16 @@
 import { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
 
 import { deleteProject } from './../../store';
 import ProjectTitle from './../project-titles';
+import axios from './../../Api/axios';
 
 class DeleteProject extends PureComponent {
   deleteProject = ({ _id }) => async () => {
-    console.warn(_id);
-    const { data } = await axios({
-      method: 'post',
-      url: 'http://dashboard.handh.ru:3000/api/deleteProject',
-      data: { _id },
-    });
+    const { data } = await axios.post('/deleteProject', { _id });
     if (data.success) {
       this.props.deleteProject({ _id });
-      return 'asdas';
+      return 'success';
     }
     return data.success;
   }

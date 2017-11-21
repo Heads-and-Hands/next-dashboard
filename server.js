@@ -26,6 +26,9 @@ app.prepare()
     server.use('/redmine', proxy(proxyRedmine));
 
     server.use('/api', api);
+    server.get('/admin/editProject', (req, res) => res.redirect('/admin'));
+    server.get('/admin/deleteProject', (req, res) => res.redirect('/admin'));
+    server.get('/admin/addProject', (req, res) => res.redirect('/admin'));
     server.get('*', (req, res) => handle(req, res));
     server.listen(port, (error) => {
       if (error) console.warn(error);

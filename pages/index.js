@@ -1,26 +1,21 @@
 import { PureComponent } from 'react';
-import axios from 'axios';
 import withRedux from 'next-redux-wrapper';
 import Link from 'next/link';
 
 import initStore, { initProjects } from '../store';
 import { Title, Projects, Head, Project } from '../pages.styles/index.style';
+import axios from './../Api/axios';
 
 class Main extends PureComponent {
   static async getInitialProps({ store, isServer }) {
     if (!store.getState().projects.length) {
       try {
-        const res = await axios({
-          method: 'get',
-          url: 'http://dashboard.handh.ru:3000/api/getProjects',
-          headers: {
-            Accept: 'application/json; charset=utf-8',
-          },
-        });
+        const res = await axios.get('/getProjects');
         const projects = await res.data;
         store.dispatch(initProjects(projects));
         return { isServer };
       } catch (e) {
+        console.warn(e);
         return {
           projects: [],
         };
@@ -36,7 +31,12 @@ class Main extends PureComponent {
       <div>
         <Head>
           <Title>Heads and Hands Dashboard</Title>
-          <Link href={isLogined ? '/admin' : '/auth'} prefetch><a>Вход</a></Link>
+          <Link
+            href={isLogined ? '/admin' : '/auth'} 
+            prefetch
+          >
+            <a>Вход</a>
+          </Link>
         </Head>
         <Projects>
           {
