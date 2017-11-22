@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import { PureComponent } from 'react';
 
 import { Wrapper, Input, Label } from './style';
 
@@ -9,12 +9,16 @@ export default class InputComponent extends PureComponent {
     target: '',
   }
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      labelActive: false,
-      value: this.props.value,
-    };
+  state = {
+    labelActive: false,
+    value: this.props.value,
+  };
+  
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.value !== this.state.value) {
+      this.setState(() => ({ value: nextProps.value, labelActive: false }));
+    }
   }
 
   changeValue = (e) => {

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import {
   Wrapper,
@@ -11,7 +11,7 @@ import {
   Submit,
 } from './style';
 
-class ProjectForm extends Component {
+class ProjectForm extends PureComponent {
   changeValue = (value, target) => {
     this.props.onChangeField(value, target);
   }

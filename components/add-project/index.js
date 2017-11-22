@@ -5,6 +5,7 @@ import withRedux from 'next-redux-wrapper';
 import initStore, { addProject } from './../../store';
 import Form from './../project-form';
 import axios from './../../Api/axios';
+import Omit from './../../utils';
 
 class AddProjectComponent extends PureComponent {
   state = {
@@ -14,6 +15,7 @@ class AddProjectComponent extends PureComponent {
     teamCityId: '',
     redmineId: '',
     githubId: '',
+    success: false,
   };
 
   changeValue = (value, target) => {
@@ -21,10 +23,21 @@ class AddProjectComponent extends PureComponent {
   }
 
   addProject = async () => {
-    const { data } = await axios.post('/createProject', { ...this.state });
+    this.setState(prevState => ({ ...prevState, success: false }));
+    const filteredData = Omit(this.state, 'success');
+    const { data } = await axios.post('/createProject', filteredData);
 
     if (data.success) {
-      this.props.addProject({ ...this.state, _id: data._id });
+      this.props.addProject({ ...filteredData, _id: data._id });
+      this.setState(() => ({
+        name: '',
+        platform: '',
+        hockeyAppId: '',
+        teamCityId: '',
+        redmineId: '',
+        githubId: '',
+        success: true, 
+      }));
     }
   }
 
@@ -38,6 +51,7 @@ class AddProjectComponent extends PureComponent {
           {...this.state} 
           text="Добавить" 
         />
+        {this.state.success && <Success>Проект Добавлен</Success> }
       </div>
     );
   }
@@ -50,6 +64,13 @@ const FormProject = styled(Form)`
 const Header = styled.h1`
   margin-bottom: 20px;
 `;
+
+const Success = styled.div`
+  margin-top: 10px;
+  text-align: center;
+  color: #69F0AE;
+`;
+
 
 const mapDispatchToProps = dispatch => ({
   dispatch,

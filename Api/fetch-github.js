@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export default async function fetchGithub(id) {
-  const token = 'b3972402e24daaacbbb3de317e9b1e27d82a53c6';
+  const token = 'dbf8bb25dcd442de1ac8c65a9ab4edf5ee358bbd';
   const url = `https://api.github.com/repos/Heads-and-Hands/${id}?access_token=${token}`;
   const headers = {
     Accept: 'application/vnd.github.v3+json',
