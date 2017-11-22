@@ -15,7 +15,6 @@ class Main extends PureComponent {
         store.dispatch(initProjects(projects));
         return { isServer };
       } catch (e) {
-        console.warn(e);
         return {
           projects: [],
         };
@@ -39,9 +38,10 @@ class Main extends PureComponent {
           </Link>
         </Head>
         <Projects>
-          {
-            projects.map(item =>
-              <Project key={item._id} data={item} />)
+          { projects.length ? 
+              projects.map(item =>
+                <Project key={item._id} data={item} />) :
+              <div>Ошибка</div>   
           }
         </Projects>
       </div>

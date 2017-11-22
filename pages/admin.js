@@ -7,8 +7,7 @@ import { AdminContent } from './../components';
 import Sidebar from './../components/sidebar';
 
 class Admin extends PureComponent {
-  static async getInitialProps({ res, req, store, isServer }) {
-    console.warn(req);
+  static async getInitialProps({ res, store }) {
     if (!store.getState().isLogined) {
       res.redirect('/auth');
       res.end();

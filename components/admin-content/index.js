@@ -11,7 +11,6 @@ const Error = () => (<div>Сайдбар</div>);
 class AdminContent extends Component {
   getQuery = () => {
     const { asPath } = this.props.router;
-    console.warn(asPath);
     return asPath.split('/')[2];  
   }
 

@@ -4,7 +4,7 @@ export default async function fetchTeamCity(project) {
   if (!project.teamCityId) return false;
 
   const headers = {
-    Accept: 'application/json; charset=utf-8' ,
+    Accept: 'application/json; charset=utf-8',
     'Content-Type': 'application/json; charset=utf-8',
     Authorization: `Basic ${window.btoa('developer:dev1861')}`, 
   };

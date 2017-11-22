@@ -17,7 +17,7 @@ class AddProjectComponent extends PureComponent {
   };
 
   changeValue = (value, target) => {
-    this.setState({ [target]: value }, console.log(this.state));
+    this.setState(prevState => ({ ...prevState, [target]: value }));
   }
 
   addProject = async () => {
