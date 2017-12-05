@@ -24,17 +24,20 @@ class Main extends PureComponent {
     }
   }
 
+  getHref = () => (this.props.isLogined ? '/admin?addProject' : '/auth'); 
+
   render() {
-    const { projects, isLogined } = this.props;
+    const { projects } = this.props;
     return (
       <div>
         <Head>
           <Title>Heads and Hands Dashboard</Title>
           <Link
-            href={isLogined ? '/admin' : '/auth'} 
+            href={this.getHref()}
+            as={this.getHref().replace('?', '/')} 
             prefetch
           >
-            <a>Вход</a>
+            <a href={this.getHref()}>Вход</a>
           </Link>
         </Head>
         <Projects>

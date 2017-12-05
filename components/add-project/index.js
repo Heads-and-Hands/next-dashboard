@@ -5,7 +5,7 @@ import withRedux from 'next-redux-wrapper';
 import initStore, { addProject } from './../../store';
 import Form from './../project-form';
 import axios from './../../Api/axios';
-import Omit from './../../utils';
+import omit from './../../utils';
 
 class AddProjectComponent extends PureComponent {
   state = {
@@ -19,29 +19,37 @@ class AddProjectComponent extends PureComponent {
   };
 
   changeValue = (value, target) => {
-    this.setState(prevState => ({ ...prevState, [target]: value }));
+    this.setState(prevState => ({ 
+      ...prevState,
+      [target]: value,
+      success: false,
+      error: false,
+    }));
   }
 
   addProject = async () => {
     this.setState(prevState => ({ ...prevState, success: false }));
-    const filteredData = Omit(this.state, 'success');
+    const filteredData = omit(this.state, 'success', 'error');
     const { data } = await axios.post('/createProject', filteredData);
+    const { success } = data;
+    this.setState(() => ({
+      name: '',
+      platform: '',
+      hockeyAppId: '',
+      teamCityId: '',
+      redmineId: '',
+      githubId: '',
+      error: !success,
+      success,       
+    }));
 
-    if (data.success) {
+    if (success) {
       this.props.addProject({ ...filteredData, _id: data._id });
-      this.setState(() => ({
-        name: '',
-        platform: '',
-        hockeyAppId: '',
-        teamCityId: '',
-        redmineId: '',
-        githubId: '',
-        success: true, 
-      }));
-    }
+    } 
   }
 
   render() {
+    const { error, success } = this.state;
     return (
       <div>
         <Header>Добавление проекта</Header>
@@ -51,7 +59,9 @@ class AddProjectComponent extends PureComponent {
           {...this.state} 
           text="Добавить" 
         />
-        {this.state.success && <Success>Проект Добавлен</Success> }
+      
+        { success && <Success>Проект Добавлен</Success> }
+        { error && <Error>Произошла ошибка </Error> }
       </div>
     );
   }
@@ -69,6 +79,12 @@ const Success = styled.div`
   margin-top: 10px;
   text-align: center;
   color: #69F0AE;
+`;
+
+const Error = styled.div`
+  margin-top: 10px;
+  text-align: center;
+  color: red;
 `;
 
 

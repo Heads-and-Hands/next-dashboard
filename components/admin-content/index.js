@@ -30,6 +30,7 @@ class AdminContent extends Component {
     );
   }
 }
+
 const Content = styled.div`
   display: flex;
   justify-content: center;
@@ -37,4 +38,5 @@ const Content = styled.div`
   width: 70%;
   max-height: 100vh;
 `;
+
 export default withRouter(AdminContent);
