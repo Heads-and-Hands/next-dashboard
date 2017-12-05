@@ -84,7 +84,7 @@ const Success = styled.div`
 const Error = styled.div`
   margin-top: 10px;
   text-align: center;
-  color: red;
+  color: #c62828;
 `;
 
 
